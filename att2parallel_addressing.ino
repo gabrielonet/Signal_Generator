@@ -1,4 +1,6 @@
-float att = 0.5 ; // value in dB
+//Since HMC472 addressing bits are LOW instead of HIGH, we need to compute 6 bits in old classic fasion
+//and negate bits at the end.
+float att = 91 ; // Enter here value in dB
 
 int a = 0 ;
 int b = 0 ;
@@ -76,9 +78,9 @@ bit_3 = bitRead(num, 2);
 bit_4 = bitRead(num, 1);
 bit_5 = bitRead(num, 0);
 byte_D = String(!bit_0) + "," + String(!bit_1) + "," + String(!bit_2) + "," + String(!bit_3) + "," + String(!bit_4) + "," + String(!bit_5);
-// Here we should call 4 different instances of MCP23008 to write values into dividers
+int stop = millis();
 
-
+// Here we should call 4 different instances of MCP23008 to write values into dividers via i2c bus.
 //Serial.println("Computing values for " + String(att) + "dB");  
 //Serial.println("Divider A attenuation = " + String(a) + "dB");
 //Serial.println("Divider B attenuation = " + String(b) + "dB");
@@ -89,7 +91,6 @@ byte_D = String(!bit_0) + "," + String(!bit_1) + "," + String(!bit_2) + "," + St
 //Serial.println("writting divider B with " + byte_B );
 //Serial.println("writting divider C with " + byte_C );
 //Serial.println("writting divider D with " + byte_D );
-int stop = millis();
 
 //Serial.println("Compute time = " + String(stop - start) + " miliseconds" );
 }
